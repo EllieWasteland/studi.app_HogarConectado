@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studi.app - Actividad Formativa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #2c1e0f;
+            --primary-medium: #4a2c15;
+            --primary-light: #7a4c24;
+            --accent: #e67e22;
+            --accent-dark: #d35400;
+            --accent-light: #ff9e4a;
+            --text-light: #f8f9fa;
+            --text-muted: #c9c9c9;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: var(--text-light);
+        }
+        
+        /* Floating leaves */
+        .leaf {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-size: contain;
+            opacity: 0.7;
+            z-index: -1;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        
+        .leaf-1 { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e67e22"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17 1.02.3 1.59.38L8 24l1.86-1.86c.51.11 1.04.17 1.59.17 4.93 0 8.93-4 8.93-8.93 0-.55-.06-1.08-.17-1.59L24 16l-1.72-1.69c-.08-.57-.21-1.11-.38-1.59l2.3-.95-.66-1.89C16.17 5.9 10 8 8 17z"/></svg>'); }
+        .leaf-2 { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffb142"><path d="M21.9,11.5c-0.1-0.2-0.2-0.4-0.4-0.6c-0.2-0.2-0.4-0.3-0.6-0.4c-0.2-0.1-0.5-0.1-0.7-0.1c-0.3,0-0.5,0-0.8,0.1c-0.2,0.1-0.4,0.2-0.6,0.4c-0.2,0.2-0.3,0.4-0.4,0.6c-0.1,0.2-0.2,0.5-0.2,0.7c0,0.3,0,0.5,0.1,0.8c0.1,0.2,0.2,0.4,0.4,0.6c0.2,0.2,0.4,0.3,0.6,0.4c0.2,0.1,0.5,0.1,0.7,0.1c0.3,0,0.5,0,0.8-0.1c0.2-0.1,0.4-0.2,0.6-0.4c0.2-0.2,0.3-0.4,0.4-0.6c0.1-0.2,0.1-0.5,0.1-0.7C22.1,12,22,11.7,21.9,11.5z M12.5,3c-0.2-0.1-0.4-0.2-0.6-0.4c-0.2-0.2-0.3-0.4-0.4-0.6C11.4,1.7,11.4,1.5,11.4,1.2c0-0.3,0-0.5,0.1-0.8c0.1-0.2,0.2-0.4,0.4-0.6c0.2-0.2,0.4-0.3,0.6-0.4C12.7-0.9,13-0.9,13.2-0.9c0.3,0,0.5,0,0.8,0.1c0.2,0.1,0.4,0.2,0.6,0.4c0.2,0.2,0.3,0.4,0.4,0.6c0.1,0.2,0.1,0.5,0.1,0.7c0,0.3,0,0.5-0.1,0.8c-0.1,0.2-0.2,0.4-0.4,0.6c-0.2,0.2-0.4,0.3-0.6,0.4c-0.2,0.1-0.5,0.1-0.7,0.1C13,3.1,12.7,3.1,12.5,3z M8.5,18.1c-0.2-0.1-0.4-0.2-0.6-0.4c-0.2-0.2-0.3-0.4-0.4-0.6c-0.1-0.2-0.1-0.5-0.1-0.7c0-0.3,0-0.5,0.1-0.8c0.1-0.2,0.2-0.4,0.4-0.6c0.2-0.2,0.4-0.3,0.6-0.4c0.2-0.1,0.5-0.1,0.7-0.1c0.3,0,0.5,0,0.8,0.1c0.2,0.1,0.4,0.2,0.6,0.4c0.2,0.2,0.3,0.4,0.4,0.6c0.1,0.2,0.1,0.5,0.1,0.7c0,0.3,0,0.5-0.1,0.8c-0.1,0.2-0.2,0.4-0.4,0.6c-0.2,0.2-0.4,0.3-0.6,0.4c-0.2,0.1-0.5,0.1-0.7,0.1C9,18.2,8.7,18.2,8.5,18.1z M17.5,15.1c-0.2-0.1-0.4-0.2-0.6-0.4c-0.2-0.2-0.3-0.4-0.4-0.6c-0.1-0.2-0.1-0.5-0.1-0.7c0-0.3,0-0.5,0.1-0.8c0.1-0.2,0.2-0.4,0.4-0.6c0.2-0.2,0.4-0.3,0.6-0.4c0.2-0.1,0.5-0.1,0.7-0.1c0.3,0,0.5,0,0.8,0.1c0.2,0.1,0.4,0.2,0.6,0.4c0.2,0.2,0.3,0.4,0.4,0.6c0.1,0.2,0.1,0.5,0.1,0.7c0,0.3,0,0.5-0.1,0.8c-0.1,0.2-0.2,0.4-0.4,0.6c-0.2,0.2-0.4,0.3-0.6,0.4c-0.2,0.1-0.5,0.1-0.7,0.1C18,15.2,17.7,15.2,17.5,15.1z M4.5,9.1c-0.2-0.1-0.4-0.2-0.6-0.4c-0.2-0.2-0.3-0.4-0.4-0.6C3.4,8,3.4,7.7,3.4,7.5c0-0.3,0-0.5,0.1-0.8c0.1-0.2,0.2-0.4,0.4-0.6c0.2-0.2,0.4-0.3,0.6-0.4C4.7,5.6,5,5.6,5.2,5.6c0.3,0,0.5,0,0.8,0.1c0.2,0.1,0.4,0.2,0.6,0.4c0.2,0.2,0.3,0.4,0.4,0.6c0.1,0.2,0.1,0.5,0.1,0.7c0,0.3,0,0.5-0.1,0.8c-0.1,0.2-0.2,0.4-0.4,0.6c-0.2,0.2-0.4,0.3-0.6,0.4c-0.2,0.1-0.5,0.1-0.7,0.1C5,9.2,4.7,9.2,4.5,9.1z"/></svg>'); }
+        .leaf-3 { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff793f"><path d="M19.5,12c0,4.142-3.358,7.5-7.5,7.5c-4.142,0-7.5-3.358-7.5-7.5s3.358-7.5,7.5-7.5C16.142,4.5,19.5,7.858,19.5,12z M12,6c-3.314,0-6,2.686-6,6s2.686,6,6,6s6-2.686,6-6S15.314,6,12,6z M12,10.5c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5s1.5-0.672,1.5-1.5S12.828,10.5,12,10.5z"/></svg>'); }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        /* Glass effect */
+        .glass {
+            background: rgba(45, 35, 25, 0.45);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 165, 0, 0.18);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            border-radius: 20px;
+        }
+        
+        .glass-light {
+            background: rgba(60, 45, 30, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* Screen transitions */
+        .screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            z-index: 20;
+            padding: 20px;
+            transform: scale(0.95);
+        }
+        
+        .screen.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: scale(1);
+        }
+        
+        .centered-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Spinner animation */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--accent);
+            animation: spin 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            border: none;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 10px rgba(230, 126, 34, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(60, 45, 30, 0.6);
+            color: var(--text-light);
+            border: 1px solid rgba(210, 105, 30, 0.5);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(80, 60, 40, 0.7);
+        }
+        
+        /* Input fields */
+        .input-field {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(35, 25, 15, 0.5);
+            border: 1px solid rgba(210, 105, 30, 0.3);
+            border-radius: 12px;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.2);
+            background: rgba(45, 35, 25, 0.6);
+        }
+        
+        /* Answer styles */
+        .correct-answer-style {
+            background-color: #27ae60 !important;
+            color: #fff !important;
+            transform: scale(1.02);
+            border-color: #219653 !important;
+            box-shadow: 0 4px 8px rgba(39, 174, 96, 0.3);
+        }
+        
+        .incorrect-answer-style {
+            background-color: #c0392b !important;
+            color: #fff !important;
+            border-color: #a93226 !important;
+            box-shadow: 0 4px 8px rgba(192, 57, 43, 0.2);
+        }
+        
+        /* Progress bar */
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        /* Video player */
+        .video-wrapper {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            z-index: 5;
+        }
+        
+        .play-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .play-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(230, 126, 34, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .play-button:hover {
+            background: rgba(230, 126, 34, 0.9);
+            transform: scale(1.1);
+        }
+        
+        .play-button i {
+            color: white;
+            font-size: 40px;
+            margin-left: 5px;
+        }
+        
+        /* Modal styling */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            width: 100%;
+            max-width: 500px;
+            background: linear-gradient(135deg, #3a2818, #2c1e0f);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+        
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(210, 105, 30, 0.3);
+        }
+        
+        .modal-body {
+            padding: 25px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-light);
+        }
+        
+        /* Question styling */
+        .question-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .answer-option {
+            padding: 18px;
+            background: rgba(60, 45, 30, 0.5);
+            border: 1px solid rgba(210, 105, 30, 0.2);
+            border-radius: 12px;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            text-align: left;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .answer-option:hover {
+            background: rgba(80, 60, 40, 0.6);
+            transform: translateY(-2px);
+            border-color: rgba(210, 105, 30, 0.4);
+        }
+        
+        /* Result code */
+        .result-code {
+            font-family: 'Courier New', monospace;
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 165, 0, 0.4);
+            display: inline-block;
+            margin: 15px 0;
+            color: var(--accent-light);
+            text-shadow: 0 0 5px rgba(255, 158, 74, 0.5);
+        }
+        
+        /* Student badge */
+        .student-badge {
+            background: rgba(230, 126, 34, 0.15);
+            border: 1px solid rgba(230, 126, 34, 0.3);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .student-badge i {
+            margin-right: 8px;
+            color: var(--accent-light);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .modal-content {
+                max-width: 95%;
+            }
+            
+            .btn {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+            
+            .result-code {
+                font-size: 1.1rem;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating leaves -->
+    <div class="leaf leaf-1 floating" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
+    <div class="leaf leaf-2 floating" style="top: 20%; left: 90%; animation-delay: 0.5s;"></div>
+    <div class="leaf leaf-3 floating" style="top: 40%; left: 15%; animation-delay: 1s;"></div>
+    <div class="leaf leaf-1 floating" style="top: 70%; left: 80%; animation-delay: 1.5s;"></div>
+    <div class="leaf leaf-2 floating" style="top: 85%; left: 10%; animation-delay: 2s;"></div>
+    
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="screen active">
+        <div class="glass rounded-3xl p-8 sm:p-12 flex flex-col items-center max-w-lg w-full mx-4">
+            <div class="mb-8">
+                <div class="bg-gray-800/30 border border-amber-800/50 rounded-full w-28 h-28 mx-auto flex items-center justify-center mb-6">
+                    <i class="fas fa-graduation-cap text-amber-400 text-5xl"></i>
+                </div>
+                <h1 class="text-4xl font-bold text-center text-amber-300 mb-3">Studi.app</h1>
+                <h2 class="text-xl font-semibold text-center text-amber-200">Actividad Formativa | Hogar Conectado</h2>
+            </div>
+            
+            <div class="spinner my-6"></div>
+            
+            <p class="text-center text-amber-300 italic mt-8 mb-4 flex items-center">
+                <i class="fas fa-heart text-red-400 mr-2"></i>
+                "Hecho con mucho café y amor por Eleanor Reyes (Ellie)"
+            </p>
+        </div>
+    </div>
+    
+    <!-- Disclaimer Modal -->
+    <div id="disclaimer-modal" class="screen">
+        <div class="glass rounded-3xl p-6 sm:p-8 max-w-xl w-full">
+            <div class="text-center mb-6">
+                <div class="bg-amber-800/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-exclamation-triangle text-amber-300 text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-amber-300">Aviso Importante</h2>
+            </div>
+            
+            <div class="glass-light rounded-xl p-5 mb-6 border border-amber-800/40">
+                <p class="text-amber-100 mb-4">Esta aplicación está protegida por derechos de autor y actualmente en proceso de patente.</p>
+                
+                <p class="text-amber-100 mb-4">Al continuar, usted acepta:</p>
+                
+                <ul class="space-y-3 text-amber-100">
+                    <li class="flex items-start">
+                        <i class="fas fa-ban text-amber-400 mt-1 mr-3"></i>
+                        <span>No modificar, alterar o descompilar la aplicación</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-lock text-amber-400 mt-1 mr-3"></i>
+                        <span>No intentar acceder al código fuente o ingeniería inversa</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-share-alt-slash text-amber-400 mt-1 mr-3"></i>
+                        <span>No distribuir ni compartir copias de la aplicación</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-graduation-cap text-amber-400 mt-1 mr-3"></i>
+                        <span>Utilizar la aplicación solo para fines educativos autorizados</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-bug text-amber-400 mt-1 mr-3"></i>
+                        <span>Reportar cualquier vulnerabilidad o problema encontrado</span>
+                    </li>
+                </ul>
+                
+                <p class="text-amber-100 mt-5 p-3 bg-amber-900/20 rounded-lg">
+                    <i class="fas fa-gavel text-amber-400 mr-2"></i>
+                    Cualquier violación de estos términos puede resultar en acciones legales y la terminación de su acceso a la plataforma.
+                </p>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button id="reject-button" class="btn btn-secondary flex-1 py-3">
+                    <i class="fas fa-times mr-2"></i> Rechazar
+                </button>
+                <button id="accept-button" class="btn btn-primary flex-1 py-3">
+                    <i class="fas fa-check mr-2"></i> Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen">
+        <div class="glass rounded-3xl p-6 sm:p-8 max-w-md w-full">
+            <div class="text-center mb-8">
+                <div class="bg-amber-800/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <i class="fas fa-user-lock text-amber-300 text-3xl"></i>
+                </div>
+                <h1 class="text-3xl font-bold text-amber-300 mb-2">Bienvenid@</h1>
+                <p class="text-amber-200">Ingresa tu código de estudiante</p>
+            </div>
+            
+            <div class="mb-6">
+                <label for="student-code" class="block text-amber-300 mb-3 font-medium">Código de Estudiante</label>
+                <input 
+                    type="text" 
+                    id="student-code" 
+                    maxlength="6"
+                    class="input-field"
+                    placeholder="Ej: MJBS7X"
+                >
+                <p id="login-error" class="text-red-400 mt-2 text-sm hidden flex items-center">
+                    <i class="fas fa-exclamation-circle mr-2"></i>
+                    Código incorrecto. Inténtalo de nuevo.
+                </p>
+            </div>
+            
+            <button id="login-button" class="btn btn-primary w-full py-4">
+                <i class="fas fa-sign-in-alt mr-2"></i> Ingresar
+            </button>
+            
+            <div class="mt-6 text-center text-amber-400 text-sm">
+                <i class="fas fa-info-circle mr-1"></i>
+                Usa el código proporcionado por tu instructor
+            </div>
+        </div>
+    </div>
+    
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="screen">
+        <div class="glass rounded-3xl p-6 sm:p-8 max-w-3xl w-full">
+            <div class="text-center mb-6">
+                <h1 id="welcome-title" class="text-2xl sm:text-3xl font-bold text-amber-300 mb-3">¡Bienvenid@ a la actividad!</h1>
+                <div class="student-badge">
+                    <i class="fas fa-user-graduate"></i>
+                    <span id="student-name">Estudiante</span>
+                </div>
+            </div>
+            
+            <div class="glass-light rounded-xl p-5 mb-6 border border-amber-800/40">
+                <h2 class="text-xl font-semibold text-amber-300 mb-5 pb-2 border-b border-amber-800/40">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    Instrucciones de la Actividad
+                </h2>
+                
+                <div class="space-y-4 text-amber-100">
+                    <div class="flex items-start">
+                        <div class="bg-amber-700 rounded-full w-7 h-7 flex items-center justify-center mr-3 mt-1 flex-shrink-0">1</div>
+                        <p>Verás un video de aproximadamente <span class="font-semibold text-amber-300">3 minutos</span> de duración sobre el tema "Hogar Conectado".</p>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-amber-700 rounded-full w-7 h-7 flex items-center justify-center mr-3 mt-1 flex-shrink-0">2</div>
+                        <p>Durante el video, aparecerán <span class="font-semibold text-amber-300">10 preguntas</span> en momentos específicos.</p>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-amber-700 rounded-full w-7 h-7 flex items-center justify-center mr-3 mt-1 flex-shrink-0">3</div>
+                        <p>Cada pregunta tiene <span class="font-semibold text-amber-300">4 opciones de respuesta</span>. Selecciona la que consideres correcta.</p>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-amber-700 rounded-full w-7 h-7 flex items-center justify-center mr-3 mt-1 flex-shrink-0">4</div>
+                        <p>Tendrás <span class="font-semibold text-amber-300">1 minuto</span> para responder cada pregunta. Si no respondes a tiempo, pasará automáticamente a la siguiente.</p>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-amber-700 rounded-full w-7 h-7 flex items-center justify-center mr-3 mt-1 flex-shrink-0">5</div>
+                        <p>Por esta ocasión, tienes <span class="font-semibold text-amber-300">intentos ilimitados</span> para completar la actividad.</p>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-amber-700 rounded-full w-7 h-7 flex items-center justify-center mr-3 mt-1 flex-shrink-0">6</div>
+                        <p>Tu progreso se guardará automáticamente. Puedes pausar y continuar en cualquier momento.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-8 p-4 bg-amber-900/30 rounded-lg border border-amber-800/50">
+                    <h3 class="font-semibold text-amber-300 mb-2 flex items-center">
+                        <i class="fas fa-lightbulb text-amber-400 mr-2"></i>
+                        Consejo:
+                    </h3>
+                    <p class="text-amber-100">Presta atención a los detalles del video, ya que las preguntas se basan en su contenido. ¡Mucho éxito!</p>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button id="start-activity-button" class="btn btn-primary py-4 px-10 text-lg">
+                    Comenzar Actividad
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Video Activity Screen -->
+    <div id="video-activity" class="screen">
+        <div class="w-full max-w-4xl mx-auto">
+            <!-- Activity Controls -->
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+                <div class="flex items-center gap-4">
+                    <!-- Pause Button -->
+                    <button id="pause-button" class="glass px-5 py-3 rounded-xl flex items-center border border-amber-800/40">
+                        <i class="fas fa-pause text-amber-300 mr-2"></i>
+                        <span class="text-amber-100">Pausar</span>
+                    </button>
+                    
+                    <!-- Student Info -->
+                    <div class="glass px-4 py-2 rounded-xl border border-amber-800/40 text-amber-200">
+                        <i class="fas fa-user-circle mr-2"></i>
+                        <span id="current-student-name">Estudiante</span>
+                    </div>
+                </div>
+                
+                <!-- Progress Indicator -->
+                <div class="glass px-5 py-3 rounded-xl border border-amber-800/40">
+                    <span class="text-amber-100">Progreso: </span>
+                    <span id="progress-indicator" class="font-bold text-amber-300">0/10</span>
+                    <div class="progress-container mt-2">
+                        <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Floating Holder for the Activity -->
+            <div class="glass rounded-2xl shadow-2xl shadow-black/50 p-4 sm:p-5">
+                <!-- Video Wrapper -->
+                <div class="video-wrapper">
+                    <!-- Standard HTML5 Video Player -->
+                    <video id="interactive-video" class="w-full h-auto rounded-lg" 
+                           src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" 
+                           playsinline>
+                    </video>
+
+                    <!-- Play Button Overlay -->
+                    <div id="play-overlay" class="play-overlay">
+                         <button id="play-button" aria-label="Reproducir video" class="play-button">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Score Display -->
+                <div id="score-container" class="text-center mt-5 text-lg font-medium text-amber-300">
+                    <i class="fas fa-star mr-2"></i>
+                    Aciertos: <span id="score" class="font-bold text-amber-400 text-xl">0</span>/10
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pause Modal -->
+    <div id="pause-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h2 class="text-xl sm:text-2xl font-bold text-amber-300">
+                    <i class="fas fa-pause-circle mr-2"></i>
+                    Actividad en Pausa
+                </h2>
+            </div>
+            
+            <div class="modal-body">
+                <p class="text-amber-200 text-center mb-8 text-lg">
+                    ¿Qué deseas hacer?
+                </p>
+                
+                <div class="flex flex-col gap-4">
+                    <button id="resume-button" class="btn btn-primary py-4 text-lg">
+                        <i class="fas fa-play mr-2"></i> Reanudar Actividad
+                    </button>
+                    <button id="surrender-button" class="btn btn-secondary py-4 text-lg">
+                        <i class="fas fa-flag mr-2"></i> Rendirme y Salir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Question Modal -->
+    <div id="question-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header flex justify-between items-center">
+                <div class="bg-amber-800/40 text-amber-200 px-4 py-2 rounded-full flex items-center">
+                    <i class="fas fa-clock mr-2"></i>
+                    <span id="question-time">01:00</span>
+                </div>
+                <div class="text-amber-200 font-medium">
+                    Pregunta <span id="question-number">1</span>/10
+                </div>
+            </div>
+            
+            <div class="modal-body">
+                <h2 id="question-text" class="text-xl sm:text-2xl font-bold mb-8 text-center text-amber-100"></h2>
+                <div id="choices-container" class="question-container">
+                    <!-- Answer buttons will be generated here -->
+                </div>
+                <p id="feedback-text" class="text-center mt-6 font-medium h-8 text-lg"></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Results Modal -->
+    <div id="results-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h2 class="text-2xl font-bold text-amber-300">
+                    <i class="fas fa-trophy mr-2"></i>
+                    ¡Actividad Completada!
+                </h2>
+            </div>
+            
+            <div class="modal-body">
+                <div class="text-center mb-8">
+                    <div class="inline-block bg-amber-800/20 rounded-full p-5 mb-6">
+                        <i class="fas fa-medal text-amber-400 text-5xl"></i>
+                    </div>
+                    <p class="text-amber-200 text-xl mb-2">Tu puntuación:</p>
+                    <p class="text-5xl font-bold text-amber-400 mb-4"><span id="final-score">0</span>/10</p>
+                    
+                    <div class="flex justify-center mt-6">
+                        <div class="result-code" id="result-code">XXXX-XXXX-XXXX</div>
+                    </div>
+                    <p class="text-amber-200 text-sm mt-3">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        Guarda este código para ver tus resultados detallados
+                    </p>
+                </div>
+                
+                <div class="glass-light p-4 rounded-lg mb-6 border border-amber-800/40">
+                    <div class="flex items-start">
+                        <i class="fas fa-exclamation-circle text-amber-400 mt-1 mr-3 text-xl"></i>
+                        <p class="text-amber-100">
+                            Este código contiene información sobre tus respuestas y será necesario 
+                            para revisar tus resultados en la plataforma.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <button id="finish-button" class="btn btn-primary py-4 px-10 text-lg">
+                        <i class="fas fa-check mr-2"></i> Finalizar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. App Configuration
+        const students = {
+            "MJBS7X": "Bacuilima Sanmartin, Maria Jose",
+            "PSMC2R": "Castro Mogrovejo, Paul Santiago",
+            "SBYL9P": "Bacuilima Yunga, Saul Blas",
+            "KALA5T": "Lucero Arcentales, Kevin Alexander",
+            "AMBC1E": "Barbecho Cardenas, Angela Mercedes",
+            "AFDP8W": "Delgado Pesantez, Andrea Fernanda",
+            "NYCJ4B": "Cobos Criollo, Nelly Yessenia",
+            "RESK0G": "Santander Castillo, Ruth Estefany",
+            "JFBB6D": "Barros Becerra, Jhoana Fernanda",
+            "ELBM3F": "Buele Morocho, Evelin Lisseth",
+            "AGUC8H": "Cueva Urgiles, Anngye Gricelle",
+            "JEPA1Z": "Peña Aucapiña, Johanna Estefania",
+            "JMGG5V": "Espinosa Guaman, Jennifer Michelle",
+            "SLMF2C": "Moscoso Farfan, Samantha Lizbeth",
+            "EMIR9A": "Ibarra Reyes, Edisson Mateo",
+            "MLSJ4Q": "Siguencia Lopez, Marilyn Lisseth",
+            "ARJR7N": "Jimbo Rodriguez, Arianna Carolina",
+            "MRPO0M": "Peñafiel Orellana, Mariuxi Renata",
+            "MIMP6U": "Mayllazhungo Pomaquiza, Maria Ines",
+            "TSTO3Y": "Tacuri Ochoa, Thalia Soledad",
+            "KPMF1L": "Morocho Farez, Katherine Paulina",
+            "MAZA5X": "Zhinin Alvarracin, Mariana Amparito",
+            "MDQY7S": "Quito Yautibug, Marisol Dayanna",
+            "DFYR9P": "Yupa Romero, Diego Fernando"
+        };
+
+        const questions = [
+            {
+                time: 8,
+                text: "¿Qué hace el conejo al salir de su madriguera?",
+                choices: ["Come una zanahoria", "Bosteza y se estira", "Empieza a correr", "Busca a sus amigos"],
+                correctAnswerIndex: 1,
+                answered: false
+            },
+            {
+                time: 30,
+                text: "Los roedores molestan a una mariposa, ¿qué le lanzan?",
+                choices: ["Una piedra", "Una bellota", "Agua", "Una hoja"],
+                correctAnswerIndex: 1,
+                answered: false
+            },
+            {
+                time: 55,
+                text: "¿Cuál es el primer animal que el conejo ve siendo molestado?",
+                choices: ["Una mariposa", "Un pájaro", "Una ardilla", "Un erizo"],
+                correctAnswerIndex: 0,
+                answered: false
+            },
+            {
+                time: 75,
+                text: "¿Qué objeto encuentra el conejo en su camino?",
+                choices: ["Un sombrero", "Un reloj", "Una llave", "Una moneda"],
+                correctAnswerIndex: 2,
+                answered: false
+            },
+            {
+                time: 95,
+                text: "¿Cómo ayuda el conejo al pájaro?",
+                choices: ["Le da comida", "Lo libera de una red", "Le construye un nido", "Lo cura"],
+                correctAnswerIndex: 1,
+                answered: false
+            },
+            {
+                time: 120,
+                text: "¿Qué estación del año se representa en el video?",
+                choices: ["Primavera", "Verano", "Otoño", "Invierno"],
+                correctAnswerIndex: 2,
+                answered: false
+            },
+            {
+                time: 140,
+                text: "¿Qué fruto recolectan los animales?",
+                choices: ["Manzanas", "Peras", "Bellotas", "Nueces"],
+                correctAnswerIndex: 2,
+                answered: false
+            },
+            {
+                time: 160,
+                text: "¿Quién lidera el grupo de animales?",
+                choices: ["El conejo", "El pájaro", "El zorro", "La ardilla"],
+                correctAnswerIndex: 3,
+                answered: false
+            },
+            {
+                time: 180,
+                text: "¿Qué problema enfrentan al final del video?",
+                choices: ["Una tormenta", "Un depredador", "Un río crecido", "Un árbol caído"],
+                correctAnswerIndex: 0,
+                answered: false
+            },
+            {
+                time: 200,
+                text: "¿Cómo resuelven el problema final?",
+                choices: ["Construyen un puente", "Buscan un camino alterno", "Esperan a que pase", "Piden ayuda"],
+                correctAnswerIndex: 0,
+                answered: false
+            }
+        ];
+
+        // 2. State Management
+        let timeChecker;
+        let score = 0;
+        let currentStudent = "";
+        let answeredCount = 0;
+        let questionTimer;
+        let startTime;
+        let studentCode = "";
+        let userAnswers = [];
+
+        // 3. DOM Elements
+        const screens = {
+            splash: document.getElementById('splash-screen'),
+            disclaimer: document.getElementById('disclaimer-modal'),
+            login: document.getElementById('login-screen'),
+            welcome: document.getElementById('welcome-screen'),
+            video: document.getElementById('video-activity')
+        };
+
+        const video = document.getElementById('interactive-video');
+        const playOverlay = document.getElementById('play-overlay');
+        const modal = document.getElementById('question-modal');
+        const questionText = document.getElementById('question-text');
+        const choicesContainer = document.getElementById('choices-container');
+        const feedbackText = document.getElementById('feedback-text');
+        const scoreDisplay = document.getElementById('score');
+        const progressIndicator = document.getElementById('progress-indicator');
+        const progressBar = document.getElementById('progress-bar');
+        const questionTime = document.getElementById('question-time');
+        const questionNumber = document.getElementById('question-number');
+        const studentCodeInput = document.getElementById('student-code');
+        const loginError = document.getElementById('login-error');
+        const welcomeTitle = document.getElementById('welcome-title');
+        const studentName = document.getElementById('student-name');
+        const currentStudentName = document.getElementById('current-student-name');
+        const pauseModal = document.getElementById('pause-modal');
+        const resultsModal = document.getElementById('results-modal');
+        const finalScore = document.getElementById('final-score');
+        const resultCodeElement = document.getElementById('result-code');
+        const finishButton = document.getElementById('finish-button');
+
+        // 4. Screen Management
+        function showScreen(screenName) {
+            Object.values(screens).forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            screens[screenName].classList.add('active');
+        }
+
+        function showModal(modalName) {
+            const modals = [pauseModal, modal, resultsModal];
+            modals.forEach(m => m.classList.remove('active'));
+            
+            if (modalName) {
+                modalName.classList.add('active');
+            }
+        }
+
+        // 5. App Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize video
+            video.load();
+            
+            // Show splash screen first
+            showScreen('splash');
+            
+            // After 5 seconds, show disclaimer
+            setTimeout(() => {
+                showScreen('disclaimer');
+            }, 5000);
+        });
+
+        // 6. Disclaimer Screen Logic
+        document.getElementById('accept-button').addEventListener('click', () => {
+            showScreen('login');
+        });
+
+        document.getElementById('reject-button').addEventListener('click', () => {
+            showScreen('splash');
+            setTimeout(() => {
+                showScreen('disclaimer');
+            }, 5000);
+        });
+
+        // 7. Login Screen Logic
+        document.getElementById('login-button').addEventListener('click', () => {
+            const code = studentCodeInput.value.trim().toUpperCase();
+            
+            if (students[code]) {
+                currentStudent = students[code];
+                studentCode = code;
+                loginError.classList.add('hidden');
+                
+                // Update student name in welcome screen
+                const lastName = currentStudent.split(',')[0];
+                welcomeTitle.textContent = `¡Bienvenid@, ${lastName}!`;
+                studentName.textContent = lastName;
+                currentStudentName.textContent = lastName;
+                
+                showScreen('welcome');
+            } else {
+                loginError.classList.remove('hidden');
+                studentCodeInput.classList.add('border-red-500');
+                setTimeout(() => {
+                    studentCodeInput.classList.remove('border-red-500');
+                }, 2000);
+            }
+        });
+
+        // Allow pressing Enter to login
+        studentCodeInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('login-button').click();
+            }
+        });
+
+        // 8. Welcome Screen Logic
+        document.getElementById('start-activity-button').addEventListener('click', () => {
+            resetQuiz();
+            showScreen('video');
+        });
+
+        // 9. Video Activity Logic
+        playOverlay.addEventListener('click', () => {
+            startTime = Date.now();
+            video.play();
+        });
+        
+        video.addEventListener('play', () => {
+            playOverlay.classList.add('hidden');
+            start_time_checker();
+        });
+        
+        video.addEventListener('pause', () => stop_time_checker());
+        
+        video.addEventListener('ended', () => {
+            playOverlay.classList.remove('hidden');
+            showResults();
+        });
+
+        function start_time_checker() {
+            if (timeChecker) return;
+            timeChecker = setInterval(() => {
+                const currentTime = Math.floor(video.currentTime);
+                const question = findQuestionForTime(currentTime);
+
+                if (question) {
+                    video.pause();
+                    question.answered = true;
+                    showQuestionModal(question);
+                }
+            }, 500);
+        }
+
+        function stop_time_checker() {
+            clearInterval(timeChecker);
+            timeChecker = null;
+        }
+        
+        function resetQuiz() {
+            score = 0;
+            answeredCount = 0;
+            scoreDisplay.textContent = score;
+            progressIndicator.textContent = `${answeredCount}/${questions.length}`;
+            progressBar.style.width = '0%';
+            questions.forEach(q => q.answered = false);
+            userAnswers = [];
+            video.currentTime = 0;
+            video.load();
+        }
+
+        function findQuestionForTime(time) {
+            return questions.find(q => !q.answered && time >= q.time);
+        }
+
+        // 10. Question Modal Logic
+        function showQuestionModal(question) {
+            const questionIndex = questions.findIndex(q => q === question);
+            questionNumber.textContent = questionIndex + 1;
+            
+            let timeLeft = 60;
+            questionTime.textContent = "01:00";
+            
+            if (questionTimer) clearInterval(questionTimer);
+            questionTimer = setInterval(() => {
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                questionTime.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(questionTimer);
+                    handleAnswer(-1, question.correctAnswerIndex, questionIndex);
+                }
+            }, 1000);
+            
+            questionText.textContent = question.text;
+            choicesContainer.innerHTML = '';
+
+            question.choices.forEach((choice, index) => {
+                const button = document.createElement('button');
+                button.textContent = choice;
+                button.className = 'answer-option';
+                button.onclick = () => {
+                    clearInterval(questionTimer);
+                    handleAnswer(index, question.correctAnswerIndex, questionIndex);
+                };
+                choicesContainer.appendChild(button);
+            });
+            
+            showModal(modal);
+        }
+        
+        function hideQuestionModal() {
+            showModal(null);
+            setTimeout(() => { feedbackText.textContent = '' }, 300);
+        }
+
+        function handleAnswer(selectedIndex, correctIndex, questionIndex) {
+            answeredCount++;
+            progressIndicator.textContent = `${answeredCount}/${questions.length}`;
+            progressBar.style.width = `${(answeredCount / questions.length) * 100}%`;
+            
+            // Store user answer
+            userAnswers.push({
+                question: questionIndex,
+                selected: selectedIndex,
+                correct: selectedIndex === correctIndex,
+                time: Date.now()
+            });
+            
+            const buttons = choicesContainer.querySelectorAll('button');
+            buttons.forEach(button => button.disabled = true);
+
+            if (selectedIndex === correctIndex) {
+                score++;
+                scoreDisplay.textContent = score;
+                feedbackText.textContent = "¡Respuesta Correcta!";
+                feedbackText.className = "text-center mt-6 font-medium h-8 text-lg text-green-400";
+                if (selectedIndex >= 0) {
+                    buttons[selectedIndex].classList.add('correct-answer-style');
+                }
+            } else {
+                feedbackText.textContent = "Respuesta Incorrecta";
+                feedbackText.className = "text-center mt-6 font-medium h-8 text-lg text-red-400";
+                if (selectedIndex >= 0) {
+                    buttons[selectedIndex].classList.add('incorrect-answer-style');
+                }
+                buttons[correctIndex].classList.add('correct-answer-style');
+            }
+
+            setTimeout(() => {
+                hideQuestionModal();
+                video.play();
+                
+                // If all questions answered, show results
+                if (answeredCount === questions.length) {
+                    setTimeout(() => {
+                        showResults();
+                    }, 1000);
+                }
+            }, 2000);
+        }
+        
+        // 11. Generate Unique Result Code
+        function generateResultCode() {
+            // Format: STCODE-SCORE-TIME-ANSWERS
+            // STCODE: Student code (6 chars)
+            // SCORE: Final score (2 digits)
+            // TIME: Minutes and seconds (4 digits)
+            // ANSWERS: First letters of answers (10 chars)
+            
+            const totalTime = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(totalTime / 60).toString().padStart(2, '0');
+            const seconds = (totalTime % 60).toString().padStart(2, '0');
+            
+            // Create answer code (A,B,C,D for each answer)
+            let answerCode = "";
+            for (const answer of userAnswers) {
+                if (answer.selected === -1) {
+                    answerCode += "X"; // Not answered
+                } else {
+                    answerCode += String.fromCharCode(65 + answer.selected); // A, B, C, D
+                }
+            }
+            
+            return `${studentCode}-${score.toString().padStart(2, '0')}-${minutes}${seconds}-${answerCode}`;
+        }
+        
+        // 12. Show Results
+        function showResults() {
+            video.pause();
+            finalScore.textContent = score;
+            const resultCode = generateResultCode();
+            resultCodeElement.textContent = resultCode;
+            
+            showModal(resultsModal);
+        }
+        
+        // 13. Finish Button
+        finishButton.addEventListener('click', () => {
+            showModal(null);
+            resetQuiz();
+            showScreen('login');
+        });
+
+        // 14. Pause Button Logic
+        document.getElementById('pause-button').addEventListener('click', () => {
+            video.pause();
+            showModal(pauseModal);
+        });
+
+        document.getElementById('resume-button').addEventListener('click', () => {
+            showModal(null);
+            video.play();
+        });
+
+        document.getElementById('surrender-button').addEventListener('click', () => {
+            showModal(null);
+            resetQuiz();
+            showScreen('login');
+        });
+
+        // 15. Video Play Button
+        document.getElementById('play-button').addEventListener('click', () => {
+            video.play();
+        });
+    </script>
+</body>
+</html>
