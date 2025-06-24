@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studi.app | HomeLink by Vitreum</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- UI Elements (Splash, Modals, etc.) -->
+    <div class="leaf leaf-1 floating" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
+    <div class="leaf leaf-2 floating" style="top: 20%; left: 90%; animation-delay: 0.5s;"></div>
+    <div class="leaf leaf-3 floating" style="top: 40%; left: 15%; animation-delay: 1s;"></div>
+    <div class="leaf leaf-1 floating" style="top: 70%; left: 80%; animation-delay: 1.5s;"></div>
+    <div class="leaf leaf-2 floating" style="top: 85%; left: 10%; animation-delay: 2s;"></div>
+    
+    <div id="splash-screen" class="screen active"><div class="glass rounded-3xl p-8 sm:p-12 flex flex-col items-center max-w-lg w-full mx-4 text-center"><div class="splash-anim-icon bg-gray-800/30 border border-amber-800/50 rounded-full w-28 h-28 mx-auto flex items-center justify-center mb-6"><i class="fas fa-graduation-cap text-amber-400 text-5xl"></i></div><h1 class="splash-anim-title text-4xl font-bold text-amber-300 mb-3">Studi.app</h1><h2 class="splash-anim-subtitle text-xl font-semibold text-amber-200 mb-6">HomeLink by Vitreum</h2><div class="splash-anim-spinner my-8"><div class="spinner"></div><p class="text-amber-300 mt-4">Cargando...</p></div><p class="splash-anim-footer text-center text-amber-300 italic mt-8 mb-4 flex items-center"><i class="fas fa-heart text-red-400 mr-2"></i>"Hecho con mucho café y ❤️ por Eleanor Reyes (Ellie)"</p></div></div>
+    <div id="disclaimer-modal" class="screen"><div class="glass rounded-3xl p-6 sm:p-8 max-w-xl w-full"><div class="text-center mb-6"><div class="bg-amber-800/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-exclamation-triangle text-amber-300 text-2xl"></i></div><h2 class="text-2xl font-bold text-amber-300">Aviso Importante</h2></div><div class="glass-light rounded-xl p-5 mb-6 border border-amber-800/40"><p class="text-amber-100 mb-4">Esta aplicación está protegida por derechos de autor y actualmente en proceso de patente.</p><p class="text-amber-100 mb-4">Al continuar, usted acepta:</p><ul class="space-y-3 text-amber-100"><li class="flex items-start"><i class="fas fa-ban text-amber-400 mt-1 mr-3"></i><span>No modificar, alterar o descompilar la aplicación</span></li><li class="flex items-start"><i class="fas fa-lock text-amber-400 mt-1 mr-3"></i><span>No intentar acceder al código fuente o ingeniería inversa</span></li><li class="flex items-start"><i class="fas fa-share-alt-slash text-amber-400 mt-1 mr-3"></i><span>No distribuir ni compartir copias de la aplicación</span></li><li class="flex items-start"><i class="fas fa-graduation-cap text-amber-400 mt-1 mr-3"></i><span>Utilizar la aplicación solo para fines educativos autorizados</span></li><li class="flex items-start"><i class="fas fa-bug text-amber-400 mt-1 mr-3"></i><span>Reportar cualquier vulnerabilidad o problema encontrado</span></li></ul><p class="text-amber-100 mt-5 p-3 bg-amber-900/20 rounded-lg"><i class="fas fa-gavel text-amber-400 mr-2"></i>Cualquier violación de estos términos puede resultar en acciones legales.</p></div><div class="flex flex-col sm:flex-row gap-4"><button id="reject-button" class="btn btn-secondary flex-1 py-3"><i class="fas fa-times mr-2"></i> Rechazar</button><button id="accept-button" class="btn btn-primary flex-1 py-3"><i class="fas fa-check mr-2"></i> Aceptar</button></div></div></div>
+    <div id="login-screen" class="screen"><div class="glass rounded-3xl p-6 sm:p-8 max-w-md w-full"><div class="text-center mb-8"><div class="bg-amber-800/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5"><i class="fas fa-user-lock text-amber-300 text-3xl"></i></div><h1 class="text-3xl font-bold text-amber-300 mb-2">Bienvenid@</h1><p class="text-amber-200">Ingresa tu código de estudiante</p></div><div class="mb-6"><label for="student-code" class="block text-amber-300 mb-3 font-medium">Código de Estudiante</label><input type="text" id="student-code" maxlength="6" class="input-field" placeholder="Ej: MJBS7X"><p id="login-error" class="text-red-400 mt-2 text-sm hidden flex items-center"><i class="fas fa-exclamation-circle mr-2"></i>Código incorrecto. Inténtalo de nuevo.</p></div><button id="login-button" class="btn btn-primary w-full py-4"><i class="fas fa-sign-in-alt mr-2"></i> Ingresar</button><div class="mt-6 text-center text-amber-400 text-sm"><i class="fas fa-info-circle mr-1"></i>Usa el código proporcionado por tu instructore</div></div></div>
+    <div id="welcome-screen" class="screen"><div class="glass rounded-3xl p-6 sm:p-8 max-w-3xl w-full"><div class="text-center mb-6"><h1 id="welcome-title" class="text-2xl sm:text-3xl font-bold text-amber-300 mb-3">¡Bienvenid@ a la actividad!</h1><div class="student-badge"><i class="fas fa-user-graduate"></i><span id="student-name">Estudiante</span></div></div><div class="glass-light rounded-xl p-5 mb-6 border border-amber-800/40"><h2 class="text-xl font-semibold text-amber-300 mb-5 pb-2 border-b border-amber-800/40"><i class="fas fa-info-circle mr-2"></i>Instrucciones de la Actividad</h2><div class="space-y-4 text-amber-100"><div class="flex items-start"><div class="bg-amber-700 rounded-full w-7 h-7 flex items-center justify-center mr-3 mt-1 flex-shrink-0">1</div><p>Verás un video y responderás <span class="font-semibold text-amber-300">10 preguntas</span>.</p></div><div class="flex items-start"><div class="bg-amber-700 rounded-full w-7 h-7 flex items-center justify-center mr-3 mt-1 flex-shrink-0">2</div><p>Luego, completarás un <span class="font-semibold text-amber-300">organizador gráfico</span> arrastrando conceptos a su lugar.</p></div><div class="flex items-start"><div class="bg-amber-700 rounded-full w-7 h-7 flex items-center justify-center mr-3 mt-1 flex-shrink-0">3</div><p>Tendrás <span class="font-semibold text-amber-300">1 minuto</span> por pregunta. ¡No te preocupes, tienes intentos ilimitados!</p></div><div class="flex items-start"><div class="bg-amber-700 rounded-full w-7 h-7 flex items-center justify-center mr-3 mt-1 flex-shrink-0">4</div><p>Tu progreso se guardará. Puedes pausar y continuar en cualquier momento.</p></div></div><div class="mt-8 p-4 bg-amber-900/30 rounded-lg border border-amber-800/50"><h3 class="font-semibold text-amber-300 mb-2 flex items-center"><i class="fas fa-lightbulb text-amber-400 mr-2"></i>Consejo:</h3><p class="text-amber-100">Presta atención a los detalles del video y los conceptos. ¡Mucho éxito!</p></div></div><div class="text-center"><button id="start-activity-button" class="btn btn-primary py-4 px-10 text-lg">Comenzar Actividad <i class="fas fa-arrow-right ml-3"></i></button></div></div></div>
+    <div id="monitoring-modal" class="modal"><div class="modal-content"><div class="modal-header text-center"><h2 class="text-xl sm:text-2xl font-bold text-amber-300"><i class="fas fa-shield-alt mr-2"></i>Atención, <span id="monitoring-student-name">Estudiante</span></h2></div><div class="modal-body text-center"><p class="text-amber-200 text-lg mb-6">Este intento está siendo monitoreado por la aplicación para asegurar la integridad de la actividad.</p><p class="text-amber-200 mb-8">Para una experiencia óptima y sin distracciones, la aplicación se mostrará en pantalla completa.</p><button id="understood-button" class="btn btn-primary w-full py-4 text-lg"><i class="fas fa-check-circle mr-2"></i>Entendido, ¡Comenzar!</button></div></div></div>
+    <div id="pause-modal" class="modal"><div class="modal-content"><div class="modal-header text-center"><h2 class="text-xl sm:text-2xl font-bold text-amber-300"><i class="fas fa-pause-circle mr-2"></i>Actividad en Pausa</h2></div><div class="modal-body"><p class="text-amber-200 text-center mb-8 text-lg">¿Qué deseas hacer?</p><div class="flex flex-col gap-4"><button id="resume-button" class="btn btn-primary py-4 text-lg"><i class="fas fa-play mr-2"></i> Reanudar Actividad</button><button id="surrender-button" class="btn btn-secondary py-4 text-lg"><i class="fas fa-flag mr-2"></i> Rendirme y Salir</button></div></div></div></div>
+    <div id="question-modal" class="modal"><div class="modal-content"><div class="modal-header flex justify-between items-center"><div class="bg-amber-800/40 text-amber-200 px-4 py-2 rounded-full flex items-center"><i class="fas fa-clock mr-2"></i><span id="question-time">01:00</span></div><div class="text-amber-200 font-medium">Pregunta <span id="question-number">1</span>/10</div></div><div class="modal-body"><h2 id="question-text" class="text-xl sm:text-2xl font-bold mb-8 text-center text-amber-100"></h2><div id="choices-container" class="question-container"></div><p id="feedback-text" class="text-center mt-6 font-medium h-8 text-lg"></p></div></div></div>
+    <div id="results-modal" class="modal"><div class="modal-content"><div class="modal-header text-center"><h2 class="text-2xl font-bold text-amber-300"><i class="fas fa-trophy mr-2"></i>¡Actividad Completada!</h2></div><div class="modal-body"><div class="text-center mb-8"><div class="inline-block bg-amber-800/20 rounded-full p-5 mb-4"><i class="fas fa-medal text-amber-400 text-5xl"></i></div><p class="text-amber-200 text-xl mb-2">Tus puntuaciones:</p><div class="flex justify-center gap-8 my-4"><div class="text-center"><p class="text-amber-300">Quiz</p><p class="text-4xl font-bold text-amber-400"><span id="final-score-quiz">0</span>/10</p></div><div class="text-center"><p class="text-amber-300">Organizador</p><p class="text-4xl font-bold text-amber-400"><span id="final-score-organizer">0</span>/9</p></div></div><div class="flex justify-center mt-4"><div class="result-code" id="result-code">XXXXXX-XX-X-XXXXXXXXXX</div></div><p class="text-amber-200 text-sm mt-3"><i class="fas fa-info-circle mr-1"></i>Guarda este código para ver tus resultados detallados</p></div><div class="glass-light p-4 rounded-lg mb-6 border border-amber-800/40"><div class="flex items-start"><i class="fas fa-exclamation-circle text-amber-400 mt-1 mr-3 text-xl"></i><p class="text-amber-100">Este código contiene tus respuestas y será necesario para la revisión en la plataforma.</p></div></div><div class="text-center mt-8"><button id="finish-button" class="btn btn-primary py-4 px-10 text-lg"><i class="fas fa-check mr-2"></i> Finalizar</button></div></div></div></div>
+
+    <!-- Video Activity Screen -->
+    <div id="video-activity" class="screen">
+        <div class="w-full max-w-4xl mx-auto">
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+                <div class="flex items-center gap-4"><button id="pause-button" class="glass px-5 py-3 rounded-xl flex items-center border border-amber-800/40"><i class="fas fa-pause text-amber-300 mr-2"></i><span class="text-amber-100">Pausar</span></button><div class="glass px-4 py-2 rounded-xl border border-amber-800/40 text-amber-200"><i class="fas fa-user-circle mr-2"></i><span id="current-student-name">Estudiante</span></div></div>
+                <div class="glass px-5 py-3 rounded-xl border border-amber-800/40"><span class="text-amber-100">Progreso: </span><span id="progress-indicator" class="font-bold text-amber-300">0/10</span><div class="progress-container mt-2"><div id="progress-bar" class="progress-bar" style="width: 0%"></div></div></div>
+            </div>
+            <div class="glass rounded-2xl shadow-2xl shadow-black/50 p-4 sm:p-5">
+                <div class="video-wrapper"><video id="interactive-video" class="w-full h-auto rounded-lg" src="video.mp4" playsinline></video><div id="play-overlay" class="play-overlay"><button id="play-button" aria-label="Reproducir video" class="play-button"><i class="fas fa-play"></i></button></div></div>
+                <div id="score-container" class="text-center mt-5 text-lg font-medium text-amber-300"><i class="fas fa-star mr-2"></i>Aciertos: <span id="score" class="font-bold text-amber-400 text-xl">0</span>/10</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Organizer Screen -->
+    <div id="organizer-screen" class="screen">
+        <div class="glass rounded-3xl p-4 sm:p-8 w-full max-w-6xl mx-auto">
+            <div class="flex flex-col gap-4 w-full">
+                <!-- Main Title -->
+                <div class="organizer-title-box text-center">
+                    <h1 class="text-2xl sm:text-3xl font-bold text-amber-300">Efectos de las Fuerzas</h1>
+                </div>
+                
+                <!-- Branches -->
+                <div class="organizer-branches">
+                    <!-- Branch 1: Forma -->
+                    <div class="organizer-branch">
+                        <div id="drop-topic-1" data-zone-id="topic-1" class="drop-zone"><span id="hint-topic-1" class="drop-zone-label"></span></div>
+                        <div class="organizer-connector"><i class="fas fa-arrow-down"></i></div>
+                        <div id="drop-concept-1" data-zone-id="concept-1" class="drop-zone"><span id="hint-concept-1" class="drop-zone-label"></span></div>
+                        <div class="organizer-connector"><i class="fas fa-arrow-down"></i></div>
+                        <div id="drop-application-1" data-zone-id="application-1" class="drop-zone"><span id="hint-application-1" class="drop-zone-label"></span></div>
+                    </div>
+                    <!-- Branch 2: Rapidez -->
+                    <div class="organizer-branch">
+                        <div id="drop-topic-2" data-zone-id="topic-2" class="drop-zone"><span id="hint-topic-2" class="drop-zone-label"></span></div>
+                        <div class="organizer-connector"><i class="fas fa-arrow-down"></i></div>
+                        <div id="drop-concept-2" data-zone-id="concept-2" class="drop-zone"><span id="hint-concept-2" class="drop-zone-label"></span></div>
+                        <div class="organizer-connector"><i class="fas fa-arrow-down"></i></div>
+                        <div id="drop-application-2" data-zone-id="application-2" class="drop-zone"><span id="hint-application-2" class="drop-zone-label"></span></div>
+                    </div>
+                    <!-- Branch 3: Dirección -->
+                    <div class="organizer-branch">
+                        <div id="drop-topic-3" data-zone-id="topic-3" class="drop-zone"><span id="hint-topic-3" class="drop-zone-label"></span></div>
+                        <div class="organizer-connector"><i class="fas fa-arrow-down"></i></div>
+                        <div id="drop-concept-3" data-zone-id="concept-3" class="drop-zone"><span id="hint-concept-3" class="drop-zone-label"></span></div>
+                        <div class="organizer-connector"><i class="fas fa-arrow-down"></i></div>
+                        <div id="drop-application-3" data-zone-id="application-3" class="drop-zone"><span id="hint-application-3" class="drop-zone-label"></span></div>
+                    </div>
+                </div>
+
+                <!-- Item Bank -->
+                <div class="mt-6">
+                    <h2 class="text-xl font-semibold text-center mb-4 text-amber-300">Banco de Tarjetas</h2>
+                    <div id="item-bank" class="item-bank"></div>
+                </div>
+
+                <div class="text-center mt-6">
+                    <button id="finish-organizer-button" class="btn btn-primary py-3 px-8 text-lg"><i class="fas fa-check-double mr-2"></i> Verificar Organizador</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js"></script>
+</body>
+</html>
